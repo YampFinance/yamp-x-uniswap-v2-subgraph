@@ -1,0 +1,9 @@
+{
+  "network": "goerli",
+  "yampFactory": "0x9ee8078f041812ac74a8c021bd1733c71fc219cb",
+  "yampFactoryStartBlock": "4789616",
+  "uniswapFactory": "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f",
+  "uniswapFactoryStartBlock": "2638438",
+  "weth": "0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6",
+  "stablePair": "0xa0f37f6d9132e5dcde9f85bcb9619c1eea7273c3"
+}

@@ -1,0 +1,9 @@
+	{
+  "network": "bsc",
+  "yampFactory": "0xb9208d10abaa171284971a9e15d041726104d7a5",
+  "yampFactoryStartBlock": "7911749",
+  "uniswapFactory": "0xca143ce32fe78f1f7019d7d551a6402fc5350c73",
+  "uniswapFactoryStartBlock": "7648450",
+  "weth": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+  "stablePair": "0x58f876857a02d6762e0101bb5c46a8c1ed44dc16"
+}
