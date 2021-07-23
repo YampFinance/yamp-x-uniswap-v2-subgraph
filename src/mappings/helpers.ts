@@ -12,6 +12,7 @@ import { Distributor as DistributorContract } from '../types/YampFactory/Distrib
 import { Collateral as CollateralContract } from '../types/YampFactory/Collateral'
 import { Borrowable as BorrowableContract } from '../types/YampFactory/Borrowable'
 import { Pair as PairTemplate } from '../types/templates'
+import { updatePairInfo } from './uniswapPair'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 
@@ -187,13 +188,13 @@ export function loadOrCreatePair(pairAddress: Address): Pair {
   let pair = Pair.load(pairAddress.toHexString())
   // fetch info if null
   if (pair === null) {
-	let contract = PairContract.bind(pairAddress)
-	let token0Address = contract.token0()
-	let token1Address = contract.token1()
-	
-	loadOrCreateToken(token0Address)
-	loadOrCreateToken(token1Address)
-	
+    let contract = PairContract.bind(pairAddress)
+    let token0Address = contract.token0()
+    let token1Address = contract.token1()
+
+    let token0 = loadOrCreateToken(token0Address)
+    let token1 = loadOrCreateToken(token1Address)
+
     pair = new Pair(pairAddress.toHexString())
     pair.token0 = token0Address.toHexString()
     pair.token1 = token1Address.toHexString()
@@ -207,8 +208,11 @@ export function loadOrCreatePair(pairAddress: Address): Pair {
     pair.derivedETH = ZERO_BD
     pair.derivedUSD = ZERO_BD
     pair.syncCount = ZERO_BI
+
+    pair = updatePairInfo(pair as Pair)
   }
   pair.save()
+
   PairTemplate.create(pairAddress)
   return pair as Pair
 }

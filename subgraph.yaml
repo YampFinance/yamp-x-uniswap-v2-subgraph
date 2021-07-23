@@ -7,9 +7,9 @@ dataSources:
     name: YampFactory
     network: matic
     source:
-      address: "0xe37C4b6455EE7612fFB33712b2c718579ee9a2d4"
+      address: "0xc8B7300e42Fc04981266851087C23C0Bb8b36932"
       abi: YampFactory
-      startBlock: 17014440
+      startBlock: 16665642
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

@@ -8,16 +8,19 @@ import { UNISWAP_FACTORY_ADDRESS } from './constants'
 
 
 export function handleMint(event: Mint): void {
-	  
   let pair = Pair.load(event.address.toHex())
-  
+  if (pair) {
+    updatePairInfo(pair as Pair)
+  }
+}
+
+export function updatePairInfo(pair: Pair): Pair {
   pair.syncCount = pair.syncCount.plus(ONE_BI)
+  let contract = PairContract.bind(Address.fromString(pair.id))
   
   // faster sync
   //pair.save()
   //if (pair.syncCount as i32 % 10 !== 1) return
-
-  let contract = PairContract.bind(event.address)
   
   let token0 = Token.load(pair.token0)
   let token1 = Token.load(pair.token1)
@@ -67,4 +70,6 @@ export function handleMint(event: Mint): void {
   
   // update lendingPool usd values
   updateLendingPoolUSD(pair.id)
+
+  return pair as Pair
 }

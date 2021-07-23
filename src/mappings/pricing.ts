@@ -8,9 +8,10 @@ import {
 } from './helpers'
 
 export function getEthPriceInUSD(): BigDecimal {
-  let stablePair = Pair.load(STABLE_WETH_PAIR)
+  let pairAddress = Address.fromString(STABLE_WETH_PAIR)
+  let stablePair = loadOrCreatePair(pairAddress)
   if (!stablePair) return ZERO_BD
-  if (stablePair.token0 == WETH_ADDRESS) {
+  if (stablePair.token0 == Address.fromString(WETH_ADDRESS).toHexString()) {
     return stablePair.token1Price
   }
   else {
@@ -20,7 +21,7 @@ export function getEthPriceInUSD(): BigDecimal {
 
 
 export function findEthPerToken(token: Token): BigDecimal {
-  if (token.id == WETH_ADDRESS) {
+  if (token.id == Address.fromString(WETH_ADDRESS).toHexString()) {
     return ONE_BD
   }
   let pairAddress = uniswapFactoryContract.getPair(Address.fromString(token.id), Address.fromString(WETH_ADDRESS))
